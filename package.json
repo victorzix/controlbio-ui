@@ -10,7 +10,9 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -27,6 +29,7 @@
     "@changesets/cli": "^2.31.0",
     "@storybook/addon-essentials": "^8",
     "@storybook/react-vite": "^8",
+    "@storybook/test": "^8.6.18",
     "@tailwindcss/vite": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
