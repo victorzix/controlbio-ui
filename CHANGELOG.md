@@ -1,5 +1,16 @@
 # @controlbio/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- Adiciona componentes de input: Input, Textarea e MaskedInput.
+
+  - Input: label, hint, error, leftElement, rightElement, required, forwardRef, aria completo
+  - Textarea: auto-resize via react-textarea-autosize, minRows/maxRows, mesma API do Input
+  - MaskedInput: wraper do react-imask com mesma API — masks prontas para telefone, CPF, CNPJ, CEP, data e moeda
+  - Instala react-textarea-autosize, react-imask, @tiptap/react, @tiptap/pm, @tiptap/starter-kit
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@controlbio/ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -50,5 +50,12 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com",
     "access": "restricted"
+  },
+  "dependencies": {
+    "@tiptap/pm": "^3.22.4",
+    "@tiptap/react": "^3.22.4",
+    "@tiptap/starter-kit": "^3.22.4",
+    "react-imask": "^7.6.1",
+    "react-textarea-autosize": "^8.5.9"
   }
 }
