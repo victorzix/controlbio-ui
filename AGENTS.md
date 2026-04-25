@@ -46,9 +46,14 @@ Regras:
    ---
    Descrição das mudanças.
    ```
-2. Commitar o arquivo `.changeset/*.md` junto com o código e fazer push
-3. O `changesets/action` no CI detecta e abre automaticamente o PR "Version Packages"
-4. Revisar e mergear o PR — o CI faz o bump de versão, atualiza o CHANGELOG e publica no GitHub Packages automaticamente
+2. Commitar o arquivo `.changeset/*.md` junto com o código e fazer push para main
+3. O `changesets/action` detecta os arquivos `.changeset/*.md` na main e abre automaticamente o PR "Version Packages" (bump de versão + CHANGELOG)
+4. Revisar e mergear o PR → action roda de novo, não encontra changesets → publica no GitHub Packages automaticamente
+
+### Como o action decide o que fazer (roda sempre em push na main)
+- **Tem `.changeset/*.md` na main** → abre/atualiza o PR "Version Packages"
+- **Não tem `.changeset/*.md` e versão não foi publicada** → publica diretamente
+- **Não tem `.changeset/*.md` e versão já foi publicada** → não faz nada
 
 ### Proibido
 - NUNCA rodar `npx changeset version` localmente — isso bypassa o PR de release e quebra o histórico
