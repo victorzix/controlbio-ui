@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
+    "@floating-ui/dom": "^1.7.6",
     "@storybook/addon-essentials": "^8",
     "@storybook/react-vite": "^8",
     "@storybook/test": "^8.6.18",
