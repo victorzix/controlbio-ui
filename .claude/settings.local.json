@@ -1,0 +1,10 @@
+{
+  "enabledMcpjsonServers": [
+    "next-docs",
+    "filesystem",
+    "shadcn",
+    "context7",
+    "github"
+  ],
+  "enableAllProjectMcpServers": true
+}
