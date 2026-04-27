@@ -36,6 +36,13 @@ export const Success: Story = {
   },
 };
 
+export const Warning: Story = {
+  args: {
+    children: "Warning",
+    variant: "warning",
+  },
+};
+
 export const Destructive: Story = {
   args: {
     children: "Destructive",
