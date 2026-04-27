@@ -16,6 +16,8 @@ export type { RichTextEditorProps } from "./components/rich-text-editor";
 export * from "./components/dialog";
 export * from "./components/toast";
 export * from "./components/card";
+export * from "./components/badge";
+
 
 
 
