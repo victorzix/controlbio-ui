@@ -29,6 +29,7 @@
     "@changesets/cli": "^2.31.0",
     "@floating-ui/dom": "^1.7.6",
     "@storybook/addon-essentials": "^8",
+    "@storybook/addon-storysource": "^8.6.14",
     "@storybook/react-vite": "^8",
     "@storybook/test": "^8.6.18",
     "@tailwindcss/vite": "^4",
@@ -53,9 +54,11 @@
     "access": "restricted"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
     "@tiptap/pm": "^3.22.4",
     "@tiptap/react": "^3.22.4",
     "@tiptap/starter-kit": "^3.22.4",
+    "lucide-react": "^1.11.0",
     "react-imask": "^7.6.1",
     "react-textarea-autosize": "^8.5.9"
   }

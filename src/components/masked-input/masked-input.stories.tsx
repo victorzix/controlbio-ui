@@ -69,7 +69,7 @@ export const Currency: Story = {
     thousandsSeparator: ".",
     radix: ",",
     prefix: "R$ ",
-    placeholder: "R$ 0,00",
+    placeholder: "0,00",
     hint: "Somente valores positivos.",
   },
 };

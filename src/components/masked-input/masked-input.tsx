@@ -6,6 +6,7 @@ export type MaskedInputProps = IMaskInputProps<HTMLInputElement> & {
   label?: string;
   error?: string;
   hint?: string;
+  prefix?: string;
 };
 
 const inputBase = [
@@ -23,6 +24,7 @@ export const MaskedInput = ({
   required,
   className,
   id,
+  prefix,
   ...props
 }: MaskedInputProps) => {
   const generatedId = useId();
@@ -44,20 +46,28 @@ export const MaskedInput = ({
         </label>
       )}
 
-      <IMaskInput
-        id={inputId}
-        required={required}
-        aria-describedby={error ? errorId : hint ? hintId : undefined}
-        aria-invalid={!!error}
-        className={cn(
-          inputBase,
-          error
-            ? "border-destructive focus-visible:ring-destructive"
-            : "border-input focus-visible:ring-ring",
-          className
+      <div className="relative flex items-center">
+        {prefix && (
+          <span className="absolute left-3 flex h-full items-center text-sm text-muted-foreground pointer-events-none select-none">
+            {prefix}
+          </span>
         )}
-        {...props}
-      />
+        <IMaskInput
+          id={inputId}
+          required={required}
+          aria-describedby={error ? errorId : hint ? hintId : undefined}
+          aria-invalid={!!error}
+          className={cn(
+            inputBase,
+            prefix && "pl-9",
+            error
+              ? "border-destructive focus-visible:ring-destructive"
+              : "border-input focus-visible:ring-ring",
+            className
+          )}
+          {...props}
+        />
+      </div>
 
       {error && (
         <p id={errorId} className="text-sm text-destructive">
