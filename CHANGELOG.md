@@ -1,5 +1,20 @@
 # @controlbio/ui
 
+## 0.5.0
+
+### Minor Changes
+
+- b6f860f: Adicionado componente de Badge com suporte a variantes de status (Primary, Secondary, Success, Destructive) e estilo integrado à identidade visual da ControlBio.
+- bfa914c: Adicionado componente de Card modular para organização de conteúdo e layouts de dashboard, integrado com a identidade visual da marca.
+- d8b2595: Adicionado componente de Dialog (Modal) baseado em Radix UI com suporte a composição flexível, incluindo botões de ação especializados e controles de responsividade. Melhorado MaskedInput com suporte a prefixos estáticos.
+- 16a2943: Adicionado sistema de notificações (Toast) utilizando a biblioteca `sonner`, com suporte a temas e estados de sucesso, erro, info e aviso.
+
+### Patch Changes
+
+- 42dbc4d: Adicionada variante `warning` ao componente Badge e criado o componente `StatusIndicator` com efeito de pulso para sinalização de estados (neutral, success, warning, destructive).
+- 12d6c8e: Refinado componente de Toast com suporte a ícones nativos e controles aprimorados no Storybook.
+- 3527873: Configurada a identidade visual da ControlBio: paleta de cores oficial, fontes personalizadas (BlauerNue) e branding no Storybook.
+
 ## 0.4.0
 
 ### Minor Changes
