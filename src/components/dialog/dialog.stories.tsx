@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import React from "react";
 import { 
   Dialog, 
   DialogTrigger, 
@@ -13,16 +14,22 @@ import {
 } from "./dialog";
 
 /**
- * Componente de modal baseado em Radix UI.
+ * Props para a história do Dialog.
  */
-const meta: Meta<typeof Dialog> = {
+interface DialogStoryProps extends React.ComponentProps<typeof Dialog> {
+  showClose?: boolean;
+}
+
+const meta: Meta<DialogStoryProps> = {
   title: "Components/Dialog",
   component: Dialog,
 };
 
 export default meta;
 
-export const Default: StoryObj<any> = {
+type Story = StoryObj<DialogStoryProps>;
+
+export const Default: Story = {
   render: ({ showClose, ...args }) => (
     <Dialog {...args}>
       <DialogTrigger asChild>
@@ -60,9 +67,6 @@ export const Default: StoryObj<any> = {
   }
 };
 
-/**
- * História isolada para o botão de cancelamento.
- */
 export const CancelButton: StoryObj<typeof DialogCancelButton> = {
   render: (args) => <DialogCancelButton {...args}>Cancelar</DialogCancelButton>,
   args: {
@@ -70,9 +74,6 @@ export const CancelButton: StoryObj<typeof DialogCancelButton> = {
   }
 };
 
-/**
- * História isolada para o botão de confirmação.
- */
 export const ConfirmButton: StoryObj<typeof DialogConfirmButton> = {
   render: (args) => <DialogConfirmButton {...args}>Confirmar</DialogConfirmButton>,
   args: {

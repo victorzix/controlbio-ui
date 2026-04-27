@@ -12,3 +12,6 @@ export type { MaskedInputProps } from "./components/masked-input";
 
 export { RichTextEditor } from "./components/rich-text-editor";
 export type { RichTextEditorProps } from "./components/rich-text-editor";
+
+export * from "./components/dialog";
+
