@@ -1,5 +1,11 @@
 # @controlbio/ui
 
+## 0.5.1
+
+### Patch Changes
+
+- Fix: replace absolute path aliases with relative paths to ensure correct type generation for consumers
+
 ## 0.5.0
 
 ### Minor Changes

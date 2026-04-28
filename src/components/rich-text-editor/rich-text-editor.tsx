@@ -1,7 +1,7 @@
 import { useId, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 // ─── Toolbar icons ────────────────────────────────────────────────────────────
 

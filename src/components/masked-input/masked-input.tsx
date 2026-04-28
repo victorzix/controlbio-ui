@@ -1,6 +1,6 @@
 import { useId } from "react";
 import { IMaskInput, type IMaskInputProps } from "react-imask";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export type MaskedInputProps = IMaskInputProps<HTMLInputElement> & {
   label?: string;

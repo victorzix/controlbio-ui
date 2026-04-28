@@ -1,6 +1,6 @@
 import { forwardRef, useId } from "react";
 import TextareaAutosize, { type TextareaAutosizeProps } from "react-textarea-autosize";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export interface TextareaProps extends TextareaAutosizeProps {
   label?: string;
