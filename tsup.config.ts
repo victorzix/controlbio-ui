@@ -2,7 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig({
   // Entry point da lib
-  entry: ["src/index.ts", "src/styles/globals.css"],
+  entry: ["src/index.ts"],
   // Gera ESM e CJS
   format: ["esm", "cjs"],
   // Gera arquivos .d.ts
@@ -15,7 +15,4 @@ export default defineConfig({
   clean: true,
   // React e react-dom são peerDeps, não bundleia
   external: ["react", "react-dom"],
-  esbuildOptions(options) {
-    options.conditions = ["style"];
-  },
 });

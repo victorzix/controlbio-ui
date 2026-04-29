@@ -1,0 +1,58 @@
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+
+    /* Cores ControlBio Padrão */
+    --primary: #3A8B59;
+    --primary-foreground: #ffffff;
+
+    --secondary: #979C9C;
+    --secondary-foreground: #ffffff;
+
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+
+    --accent: #5EEB94;
+    --accent-foreground: #064e3b;
+
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #3A8B59;
+
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+
+    --primary: #5EEB94;
+    --primary-foreground: #0f172a;
+
+    --secondary: #979C9C;
+    --secondary-foreground: #0f172a;
+
+    --muted: #1e293b;
+    --muted-foreground: #94a3b8;
+
+    --accent: #3A8B59;
+    --accent-foreground: #ffffff;
+
+    --destructive: #f87171;
+    --destructive-foreground: #0f172a;
+
+    --border: #1e293b;
+    --input: #1e293b;
+    --ring: #5EEB94;
+
+    --card: #1e293b;
+    --card-foreground: #f8fafc;
+  }
+}

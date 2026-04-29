@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import type { Preview, Decorator } from "@storybook/react";
 import "../src/styles/globals.css";
+import "../src/styles/theme.css";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme ?? "light";
