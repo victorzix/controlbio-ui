@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Utilitários de animação (animate-in / fade / zoom / slide) usados por Dialog, etc. */
+@import "tw-animate-css";
 
 /* Habilita utilitários dark: por classe (.dark na raiz), em vez de prefers-color-scheme. */
 @custom-variant dark (&:where(.dark, .dark *));
