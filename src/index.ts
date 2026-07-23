@@ -30,3 +30,6 @@ export type { CollapsibleProps } from "./components/collapsible";
 
 export { SituationSwitch } from "./components/situation-switch";
 export type { SituationSwitchProps } from "./components/situation-switch";
+
+export { Tooltip, TooltipProvider } from "./components/tooltip";
+export type { TooltipProps } from "./components/tooltip";
