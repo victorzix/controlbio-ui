@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Habilita utilitários dark: por classe (.dark na raiz), em vez de prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @font-face {
   font-family: 'BlauerNue';
   src: url('../assets/brand/4. Fontes/Blauer/BlauerNue-Regular.ttf') format('truetype');
