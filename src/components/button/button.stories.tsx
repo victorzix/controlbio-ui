@@ -26,6 +26,13 @@ const TrashIcon = () => (
   </svg>
 );
 
+const PencilIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <path d="M12 20h9" />
+    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z" />
+  </svg>
+);
+
 const meta: Meta<typeof Button> = {
   title: "Components/Button",
   component: Button,
@@ -36,12 +43,17 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["primary", "secondary", "ghost", "outline", "destructive", "link"],
+      options: ["solid", "outline", "ghost", "link"],
+    },
+    tone: {
+      control: "select",
+      options: ["neutral", "primary", "destructive"],
     },
     size: {
       control: "select",
-      options: ["sm", "md", "lg", "icon"],
+      options: ["xs", "sm", "md", "lg", "icon-xs", "icon-sm", "icon"],
     },
+    fullWidth: { control: "boolean" },
     disabled: { control: "boolean" },
     isLoading: { control: "boolean" },
     loadingText: { control: "text" },
@@ -54,93 +66,147 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type Story = StoryObj<typeof Button>;
 
+/* ----------------------------- Básicos ----------------------------- */
+
 export const Primary: Story = {
-  args: { variant: "primary", children: "Confirmar" },
+  args: { children: "Confirmar" },
 };
 
-export const Secondary: Story = {
-  args: { variant: "secondary", children: "Cancelar" },
-};
-
-export const Ghost: Story = {
-  args: { variant: "ghost", children: "Ver mais" },
-};
-
-export const Outline: Story = {
-  args: { variant: "outline", children: "Editar" },
+export const Neutral: Story = {
+  args: { tone: "neutral", children: "Cancelar" },
 };
 
 export const Destructive: Story = {
-  args: { variant: "destructive", children: "Excluir" },
+  args: { tone: "destructive", children: "Excluir" },
+};
+
+export const Outline: Story = {
+  args: { variant: "outline", tone: "neutral", children: "Editar" },
+};
+
+export const Ghost: Story = {
+  args: { variant: "ghost", tone: "neutral", children: "Ver mais" },
 };
 
 export const Link: Story = {
-  args: { variant: "link", children: "Saiba mais" },
+  args: { variant: "link", tone: "primary", children: "Saiba mais" },
 };
 
 export const Disabled: Story = {
-  args: { variant: "primary", children: "Indisponível", disabled: true },
+  args: { children: "Indisponível", disabled: true },
 };
 
 export const Loading: Story = {
-  args: { variant: "primary", isLoading: true },
+  args: { isLoading: true },
 };
 
 export const LoadingCustomText: Story = {
   name: "Loading (texto customizado)",
-  args: { variant: "primary", isLoading: true, loadingText: "Salvando..." },
+  args: { isLoading: true, loadingText: "Salvando..." },
 };
+
+export const FullWidth: Story = {
+  name: "Largura total",
+  args: { children: "Adicionar endereço", fullWidth: true, leftIcon: <PlusIcon /> },
+  parameters: { layout: "padded" },
+};
+
+/* ----------------------------- Ícones ----------------------------- */
 
 export const WithLeftIcon: Story = {
   name: "Com ícone à esquerda",
-  args: {
-    variant: "primary",
-    children: "Adicionar",
-    leftIcon: <PlusIcon />,
-  },
+  args: { children: "Adicionar", leftIcon: <PlusIcon /> },
 };
 
 export const WithRightIcon: Story = {
   name: "Com ícone à direita",
-  args: {
-    variant: "outline",
-    children: "Próximo",
-    rightIcon: <ArrowRightIcon />,
-  },
+  args: { variant: "outline", tone: "neutral", children: "Próximo", rightIcon: <ArrowRightIcon /> },
 };
 
 export const IconOnly: Story = {
   name: "Só ícone",
   args: {
     variant: "ghost",
-    size: "icon",
+    tone: "neutral",
+    size: "icon-sm",
     "aria-label": "Excluir",
     children: <TrashIcon />,
   },
 };
 
-export const AllVariants: Story = {
-  name: "Todas as variantes",
-  render: (args) => (
-    <div className="flex flex-wrap gap-3">
-      <Button {...args} variant="primary">Primary</Button>
-      <Button {...args} variant="secondary">Secondary</Button>
-      <Button {...args} variant="ghost">Ghost</Button>
-      <Button {...args} variant="outline">Outline</Button>
-      <Button {...args} variant="destructive">Destructive</Button>
-      <Button {...args} variant="link">Link</Button>
-    </div>
-  ),
+/* --------------------------- Matrizes --------------------------- */
+
+export const ToneVariantMatrix: Story = {
+  name: "Matriz tone × variant",
+  render: (args) => {
+    const variants = ["solid", "outline", "ghost", "link"] as const;
+    const tones = ["neutral", "primary", "destructive"] as const;
+    return (
+      <table className="border-separate border-spacing-3 text-sm">
+        <thead>
+          <tr>
+            <th className="text-left text-muted-foreground font-medium" />
+            {tones.map((t) => (
+              <th key={t} className="text-left text-muted-foreground font-medium capitalize">
+                {t}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {variants.map((v) => (
+            <tr key={v}>
+              <td className="text-muted-foreground font-medium capitalize pr-2">{v}</td>
+              {tones.map((t) => (
+                <td key={t}>
+                  <Button {...args} variant={v} tone={t}>
+                    Ação
+                  </Button>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  },
 };
 
 export const AllSizes: Story = {
   name: "Todos os tamanhos",
   render: (args) => (
     <div className="flex items-center flex-wrap gap-3">
+      <Button {...args} size="xs">Extra small</Button>
       <Button {...args} size="sm">Small</Button>
       <Button {...args} size="md">Medium</Button>
       <Button {...args} size="lg">Large</Button>
-      <Button {...args} size="icon" aria-label="Adicionar"><PlusIcon /></Button>
+    </div>
+  ),
+};
+
+export const AsChild: Story = {
+  name: "asChild (link com aparência de botão)",
+  render: (args) => (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button {...args} asChild>
+        <a href="#exemplo">Ir para página</a>
+      </Button>
+      <Button {...args} asChild variant="outline" tone="neutral">
+        <a href="#exemplo">Link outline</a>
+      </Button>
+    </div>
+  ),
+};
+
+export const IconSizes: Story = {
+  name: "Tamanhos de ícone",
+  render: (args) => (
+    <div className="flex items-center flex-wrap gap-3">
+      <Button {...args} variant="ghost" tone="neutral" size="icon-xs" aria-label="Editar"><PencilIcon /></Button>
+      <Button {...args} variant="ghost" tone="neutral" size="icon-sm" aria-label="Editar"><PencilIcon /></Button>
+      <Button {...args} variant="ghost" tone="neutral" size="icon" aria-label="Editar"><PencilIcon /></Button>
+      <Button {...args} variant="ghost" tone="destructive" size="icon-sm" aria-label="Excluir"><TrashIcon /></Button>
+      <Button {...args} variant="outline" tone="neutral" size="icon-sm" aria-label="Próximo"><ArrowRightIcon /></Button>
     </div>
   ),
 };

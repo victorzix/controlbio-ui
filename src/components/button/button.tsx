@@ -1,39 +1,112 @@
 import { forwardRef } from "react";
+import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
   [
     "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium",
-    "text-sm transition-colors duration-150",
+    "transition-colors duration-150",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:cursor-not-allowed disabled:opacity-50",
     "cursor-pointer select-none",
   ],
   {
     variants: {
+      /** Forma do botão */
       variant: {
-        primary:
-          "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70",
-        ghost:
-          "bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
-        outline:
-          "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground active:bg-accent/70",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80",
-        link: "bg-transparent text-primary underline-offset-4 hover:underline h-auto px-0",
+        solid: "",
+        outline: "border bg-transparent",
+        ghost: "bg-transparent",
+        link: "bg-transparent underline-offset-4 hover:underline h-auto px-0",
+      },
+      /** Cor / intenção (combina com qualquer variant) */
+      tone: {
+        neutral: "",
+        primary: "",
+        destructive: "",
       },
       size: {
-        sm: "h-8 px-3 text-xs rounded-md",
-        md: "h-10 px-4 text-sm rounded-md",
-        lg: "h-11 px-6 text-base rounded-md",
-        icon: "h-10 w-10 rounded-md",
+        xs: "h-7 gap-1.5 px-2.5 text-xs",
+        sm: "h-8 gap-1.5 px-3 text-xs",
+        md: "h-10 px-4 text-sm",
+        lg: "h-11 px-6 text-base",
+        "icon-xs": "h-6 w-6",
+        "icon-sm": "h-8 w-8",
+        icon: "h-10 w-10",
+      },
+      fullWidth: {
+        true: "w-full",
       },
     },
+    compoundVariants: [
+      /* -------- solid -------- */
+      {
+        variant: "solid",
+        tone: "neutral",
+        class:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80 active:bg-secondary/70",
+      },
+      {
+        variant: "solid",
+        tone: "primary",
+        class:
+          "bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80",
+      },
+      {
+        variant: "solid",
+        tone: "destructive",
+        class:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 active:bg-destructive/80",
+      },
+
+      /* -------- outline -------- */
+      {
+        variant: "outline",
+        tone: "neutral",
+        class:
+          "border-input text-foreground hover:bg-muted active:bg-muted/70",
+      },
+      {
+        variant: "outline",
+        tone: "primary",
+        class:
+          "border-primary/50 text-primary hover:bg-primary/10 active:bg-primary/15",
+      },
+      {
+        variant: "outline",
+        tone: "destructive",
+        class:
+          "border-destructive text-destructive hover:bg-destructive/10 active:bg-destructive/15",
+      },
+
+      /* -------- ghost -------- */
+      {
+        variant: "ghost",
+        tone: "neutral",
+        class:
+          "text-muted-foreground hover:bg-muted hover:text-foreground active:bg-muted/70",
+      },
+      {
+        variant: "ghost",
+        tone: "primary",
+        class: "text-primary hover:bg-primary/10 active:bg-primary/15",
+      },
+      {
+        variant: "ghost",
+        tone: "destructive",
+        class:
+          "text-destructive hover:bg-destructive/10 active:bg-destructive/15",
+      },
+
+      /* -------- link -------- */
+      { variant: "link", tone: "neutral", class: "text-foreground" },
+      { variant: "link", tone: "primary", class: "text-primary" },
+      { variant: "link", tone: "destructive", class: "text-destructive" },
+    ],
     defaultVariants: {
-      variant: "primary",
+      variant: "solid",
+      tone: "primary",
       size: "md",
     },
   }
@@ -74,45 +147,74 @@ export interface ButtonProps
   isLoading?: boolean;
   /** Texto exibido durante o loading. Padrão: "Carregando" */
   loadingText?: string;
+  /**
+   * Renderiza o elemento filho no lugar do `<button>`, mesclando as classes do
+   * Button nele (via Radix Slot). Útil para `<a>` / `<Link>` com aparência de
+   * botão. Nesse modo o filho deve ser um único elemento e `leftIcon`,
+   * `rightIcon` e `isLoading` são ignorados (coloque o conteúdo dentro do filho).
+   */
+  asChild?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       variant,
+      tone,
       size,
+      fullWidth,
       className,
       leftIcon,
       rightIcon,
       isLoading = false,
       loadingText = "Carregando",
+      asChild = false,
       disabled,
       children,
       ...props
     },
     ref
-  ) => (
-    <button
-      ref={ref}
-      className={cn(buttonVariants({ variant, size }), className)}
-      disabled={disabled || isLoading}
-      aria-busy={isLoading}
-      {...props}
-    >
-      {isLoading ? (
-        <>
-          <Spinner />
-          {loadingText}
-        </>
-      ) : (
-        <>
-          {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+  ) => {
+    const classes = cn(
+      buttonVariants({ variant, tone, size, fullWidth }),
+      className
+    );
+
+    // Modo polimórfico: mescla as classes no elemento filho (ex.: <a>/<Link>).
+    // Slot exige um único filho, então não injetamos ícones/spinner aqui.
+    if (asChild) {
+      return (
+        <Slot ref={ref} className={classes} {...props}>
           {children}
-          {rightIcon && <span className="shrink-0">{rightIcon}</span>}
-        </>
-      )}
-    </button>
-  )
+        </Slot>
+      );
+    }
+
+    return (
+      <button
+        ref={ref}
+        className={classes}
+        disabled={disabled || isLoading}
+        aria-busy={isLoading}
+        {...props}
+      >
+        {isLoading ? (
+          <>
+            <Spinner />
+            {loadingText}
+          </>
+        ) : (
+          <>
+            {leftIcon && <span className="shrink-0">{leftIcon}</span>}
+            {children}
+            {rightIcon && <span className="shrink-0">{rightIcon}</span>}
+          </>
+        )}
+      </button>
+    );
+  }
 );
 
 Button.displayName = "Button";
+
+export { buttonVariants };
