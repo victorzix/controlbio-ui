@@ -13,6 +13,9 @@ export type { MaskedInputProps } from "./components/masked-input";
 export { SearchInput } from "./components/search-input";
 export type { SearchInputProps } from "./components/search-input";
 
+export { Pagination } from "./components/pagination";
+export type { PaginationProps } from "./components/pagination";
+
 export { RichTextEditor } from "./components/rich-text-editor";
 export type { RichTextEditorProps } from "./components/rich-text-editor";
 
