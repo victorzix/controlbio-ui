@@ -1,5 +1,44 @@
 # @controlbio/ui
 
+## 1.0.0
+
+### Major Changes
+
+- f433a8d: Badge: reescrita da API para os eixos `appearance` × `tone` + `shape` (BREAKING).
+
+  - `appearance`: `soft` (default) | `solid` | `outline`.
+  - `tone`: `neutral` (default) | `primary` | `success` | `warning` | `danger` | `info` — combinável com qualquer `appearance`.
+  - `shape`: `pill` (default, rounded-full) | `rounded` (rounded-md, etiqueta).
+  - Estilo padrão passou a ser soft/tonal (o usado no app); elemento raiz mudou de `<div>` para `<span>`.
+  - Adiciona `@custom-variant dark` em `globals.css` para os utilitários `dark:` responderem à classe `.dark`.
+
+  Migração: `variant="default"` → `appearance="solid" tone="primary"`; `variant="secondary"` → `appearance="solid" tone="neutral"`; `variant="success"|"warning"` → `tone` correspondente; `variant="destructive"` → `tone="danger"`; `variant="outline"` → `appearance="outline"`. Ver `docs/badge.md`.
+
+- 3fd4559: Button: reescrita da API para o eixo `tone` × `variant` (BREAKING).
+
+  - `variant` agora é só a forma: `solid | outline | ghost | link`.
+  - Novo `tone` para a cor/intenção: `neutral | primary | destructive` (combinável com qualquer `variant`).
+  - Novos `size`s: `xs`, e os de ícone `icon-xs` (24px) e `icon-sm` (32px).
+  - Nova prop `fullWidth`.
+  - Nova prop `asChild` (polimorfismo via Radix Slot — renderiza `<a>`/`<Link>` com aparência de botão).
+  - Tom neutro de `ghost`/`outline` passou a usar `muted` no hover.
+
+  Migração: `variant="primary"` → default (ou `tone="primary"`); `variant="secondary"` → `tone="neutral"`; `variant="destructive"` → `tone="destructive"`; `variant="ghost"|"outline"` → mesmo `variant` + `tone="neutral"`. Ver `docs/button.md`.
+
+### Minor Changes
+
+- 92a05a3: Adiciona o componente `Pagination`.
+
+  Barra "Página X de Y" + botões anterior/próxima (chevrons via `Button` da lib). Props `page`, `totalPages`, `onPageChange`, `previousLabel`/`nextLabel` (aria) e `showOnSinglePage`. Esconde-se sozinho quando `totalPages <= 1`. Ver `docs/pagination.md`.
+
+- e663de1: Adiciona o componente `SearchInput`.
+
+  Wrapper do `Input` com ícone de lupa embutido à esquerda (`type="search"`). Aceita todas as props do `Input` (`label`, `error`, `hint`, `rightElement`, etc.), exceto `leftElement`/`type`. Puramente visual — estado/debounce ficam no chamador. Ver `docs/search-input.md`.
+
+- f5d87bc: Adiciona o componente `Tooltip` (baseado em `@radix-ui/react-tooltip`).
+
+  API ergonômica: `<Tooltip content="...">{trigger}</Tooltip>` com props `side`, `align`, `sideOffset`, `delayDuration`, `disabled` e `className`. Também exporta `TooltipProvider` (opcional, para agrupar o delay no app). Acessível (hover + foco por teclado, `Esc`, portal). Ver `docs/tooltip.md`.
+
 ## 0.7.0
 
 ### Minor Changes
