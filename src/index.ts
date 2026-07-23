@@ -10,6 +10,9 @@ export type { TextareaProps } from "./components/textarea";
 export { MaskedInput } from "./components/masked-input";
 export type { MaskedInputProps } from "./components/masked-input";
 
+export { SearchInput } from "./components/search-input";
+export type { SearchInputProps } from "./components/search-input";
+
 export { RichTextEditor } from "./components/rich-text-editor";
 export type { RichTextEditorProps } from "./components/rich-text-editor";
 
