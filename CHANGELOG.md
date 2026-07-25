@@ -1,5 +1,13 @@
 # @controlbio/ui
 
+## 1.1.0
+
+### Minor Changes
+
+- 47e7f9a: Adiciona o componente `FileDropzone`: área de upload por arraste ou clique, com `input type=file` oculto, estado dos arquivos selecionados (nome + tamanho + remover) e emissão via `onFilesSelected`. Parametrizável por `accept`, `multiple`, `title`, `description` e `icon`. Puramente visual — o envio fica no chamador.
+- 47e7f9a: Adiciona os componentes de estado `EmptyState`, `ErrorState` e `LoadingState`. `EmptyState` é o primitivo slot-based (ícone + título + descrição + ação); `ErrorState` já vem com ícone de alerta e botão "Tentar novamente" (via `onRetry`); `LoadingState` é a linha centralizada "Carregando...". Substituem os blocos de vazio/erro/carregamento colados à mão em cada tabela.
+- 47e7f9a: Os botões `DialogCancelButton` e `DialogConfirmButton` agora delegam ao `Button` da lib e expõem os eixos `tone`/`variant`. Isso permite a confirmação destrutiva (`tone="destructive"`) sem colar classes Tailwind inline, eliminando a duplicação nos diálogos de exclusão/inativação/revogação. Os padrões (`variant="outline"` no cancelar, `variant="solid"` + `tone="primary"` no confirmar) preservam a aparência anterior.
+
 ## 1.0.0
 
 ### Major Changes
