@@ -67,6 +67,40 @@ export const Default: Story = {
   }
 };
 
+export const DestructiveConfirm: Story = {
+  render: ({ showClose, ...args }) => (
+    <Dialog {...args}>
+      <DialogTrigger asChild>
+        <button className="px-4 py-2 bg-destructive text-destructive-foreground rounded-md">
+          Excluir registro
+        </button>
+      </DialogTrigger>
+      <DialogContent showClose={showClose}>
+        <DialogHeader>
+          <DialogTitle>Excluir registro</DialogTitle>
+          <DialogDescription>
+            Esta ação não pode ser desfeita. Deseja realmente excluir este item?
+          </DialogDescription>
+        </DialogHeader>
+        <DialogFooter>
+          <DialogClose asChild>
+            <DialogCancelButton tone="destructive">Cancelar</DialogCancelButton>
+          </DialogClose>
+          <DialogConfirmButton
+            tone="destructive"
+            onConfirm={() => console.log("Excluído!")}
+          >
+            Excluir
+          </DialogConfirmButton>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ),
+  args: {
+    showClose: true,
+  },
+};
+
 export const CancelButton: StoryObj<typeof DialogCancelButton> = {
   render: (args) => <DialogCancelButton {...args}>Cancelar</DialogCancelButton>,
   args: {

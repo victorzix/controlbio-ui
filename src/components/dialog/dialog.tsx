@@ -2,6 +2,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../../lib/utils";
 import { forwardRef } from "react";
 import { X } from "lucide-react";
+import { Button, type ButtonProps } from "../button";
 
 const Dialog = DialogPrimitive.Root;
 const DialogTrigger = DialogPrimitive.Trigger;
@@ -103,42 +104,52 @@ const DialogDescription = forwardRef<
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
-const DialogCancelButton = forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & { onCancel?: () => void }
->(({ className, onCancel, onClick, ...props }, ref) => (
-  <button
-    ref={ref}
-    className={cn(
-      "inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-      className
-    )}
-    onClick={(e) => {
-      onCancel?.();
-      onClick?.(e);
-    }}
-    {...props}
-  />
-));
+/**
+ * Botão de cancelar do rodapé de diálogos. Delega ao `Button` da lib.
+ *
+ * Padrão: `variant="outline"` + `tone="neutral"`. Para o cancelar destrutivo
+ * (contorno vermelho) dos diálogos de confirmação, basta `tone="destructive"`.
+ */
+export type DialogCancelButtonProps = ButtonProps & { onCancel?: () => void };
+
+const DialogCancelButton = forwardRef<HTMLButtonElement, DialogCancelButtonProps>(
+  ({ variant = "outline", tone = "neutral", onCancel, onClick, ...props }, ref) => (
+    <Button
+      ref={ref}
+      variant={variant}
+      tone={tone}
+      onClick={(e) => {
+        onCancel?.();
+        onClick?.(e);
+      }}
+      {...props}
+    />
+  )
+);
 DialogCancelButton.displayName = "DialogCancelButton";
 
-const DialogConfirmButton = forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement> & { onConfirm?: () => void }
->(({ className, onConfirm, onClick, ...props }, ref) => (
-  <button
-    ref={ref}
-    className={cn(
-      "inline-flex h-10 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-      className
-    )}
-    onClick={(e) => {
-      onConfirm?.();
-      onClick?.(e);
-    }}
-    {...props}
-  />
-));
+/**
+ * Botão de confirmar do rodapé de diálogos. Delega ao `Button` da lib.
+ *
+ * Padrão: `variant="solid"` + `tone="primary"`. Para a confirmação destrutiva
+ * (excluir / inativar / revogar), basta `tone="destructive"`.
+ */
+export type DialogConfirmButtonProps = ButtonProps & { onConfirm?: () => void };
+
+const DialogConfirmButton = forwardRef<HTMLButtonElement, DialogConfirmButtonProps>(
+  ({ variant = "solid", tone = "primary", onConfirm, onClick, ...props }, ref) => (
+    <Button
+      ref={ref}
+      variant={variant}
+      tone={tone}
+      onClick={(e) => {
+        onConfirm?.();
+        onClick?.(e);
+      }}
+      {...props}
+    />
+  )
+);
 DialogConfirmButton.displayName = "DialogConfirmButton";
 
 export {

@@ -39,3 +39,13 @@ export type { SituationSwitchProps } from "./components/situation-switch";
 
 export { Tooltip, TooltipProvider } from "./components/tooltip";
 export type { TooltipProps } from "./components/tooltip";
+
+export { EmptyState, ErrorState, LoadingState } from "./components/state";
+export type {
+  EmptyStateProps,
+  ErrorStateProps,
+  LoadingStateProps,
+} from "./components/state";
+
+export { FileDropzone } from "./components/file-dropzone";
+export type { FileDropzoneProps } from "./components/file-dropzone";
