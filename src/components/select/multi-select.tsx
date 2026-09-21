@@ -199,7 +199,7 @@ export const MultiSelect = forwardRef<HTMLButtonElement, MultiSelectProps>(
             >
               <span
                 className={cn(
-                  "truncate text-left",
+                  "min-w-0 flex-1 truncate text-left",
                   !displayText && "text-muted-foreground"
                 )}
               >

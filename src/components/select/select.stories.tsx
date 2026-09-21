@@ -281,3 +281,27 @@ export const MultiAllStates: StoryObj<typeof MultiSelect> = {
     </div>
   ),
 };
+
+const longLabelOptions = [
+  { value: "dispositivosmedicos", label: "DISPOSITIVOSMEDICOS — DISPOSITIVOS MÉDICOS" },
+  { value: "testeamostramatriz", label: "TESTEAMOSTRAMATRIZ — TESTE AMOSTRA/MATRIZ" },
+  { value: "outramatrizlonga", label: "OUTRAMATRIZLONGA — OUTRA MATRIZ COM NOME BEM COMPRIDO" },
+];
+
+export const MultiLongLabels: StoryObj<typeof MultiSelect> = {
+  name: "Multi Select — Rótulos longos (regressão de overflow)",
+  render: () => (
+    <div className="max-w-sm rounded-md border border-dashed border-border p-4">
+      <p className="mb-3 text-xs text-muted-foreground">
+        Container com <code>max-w-sm</code> simulando um modal estreito — o
+        trigger deve truncar com reticências, nunca empurrar o container.
+      </p>
+      <MultiSelect
+        label="Matrizes"
+        placeholder="Selecione as matrizes"
+        options={longLabelOptions}
+        defaultValue={["dispositivosmedicos", "testeamostramatriz"]}
+      />
+    </div>
+  ),
+};
