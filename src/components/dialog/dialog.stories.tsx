@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { 
-  Dialog, 
-  DialogTrigger, 
-  DialogContent, 
-  DialogHeader, 
-  DialogTitle, 
-  DialogDescription, 
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
   DialogFooter,
   DialogCancelButton,
   DialogConfirmButton,
   DialogClose
 } from "./dialog";
+import { MultiSelect } from "../select/multi-select";
 
 /**
  * Props para a história do Dialog.
@@ -99,6 +100,46 @@ export const DestructiveConfirm: Story = {
   args: {
     showClose: true,
   },
+};
+
+const longLabelOptions = [
+  { value: "dispositivosmedicos", label: "DISPOSITIVOSMEDICOS — DISPOSITIVOS MÉDICOS" },
+  { value: "testeamostramatriz", label: "TESTEAMOSTRAMATRIZ — TESTE AMOSTRA/MATRIZ" },
+  { value: "outramatrizlonga", label: "OUTRAMATRIZLONGA — OUTRA MATRIZ COM NOME BEM COMPRIDO" },
+];
+
+export const WithMultiSelectLongLabels: Story = {
+  name: "Regressão — MultiSelect com rótulos longos não estoura o diálogo",
+  render: () => (
+    <Dialog defaultOpen>
+      <DialogTrigger asChild>
+        <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md">
+          Abrir
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-lg">
+        <DialogHeader>
+          <DialogTitle>Editar método de análise</DialogTitle>
+          <DialogDescription>
+            Com várias matrizes de rótulo longo selecionadas, o diálogo deve
+            permanecer dentro de <code>max-w-lg</code> — o trigger trunca com
+            reticências, nunca empurra a caixa pra fora da tela.
+          </DialogDescription>
+        </DialogHeader>
+        <MultiSelect
+          label="Matrizes"
+          options={longLabelOptions}
+          defaultValue={longLabelOptions.map((o) => o.value)}
+        />
+        <DialogFooter>
+          <DialogClose asChild>
+            <DialogCancelButton>Cancelar</DialogCancelButton>
+          </DialogClose>
+          <DialogConfirmButton>Salvar</DialogConfirmButton>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  ),
 };
 
 export const CancelButton: StoryObj<typeof DialogCancelButton> = {
